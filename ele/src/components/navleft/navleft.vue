@@ -1,7 +1,7 @@
 <template>
     <div id="nav-l">
       <ul>
-        <li class="normal" v-for="(item,key) in list" @click="nav(key)" :class="{'active':item.show}">
+        <li class="normal" v-for="(item,key) in list" @click="nav(key,item.name)" :class="{'active':item.show}">
           <div class="li-item">
             <span>{{item.name}}</span>
           </div>
@@ -11,6 +11,7 @@
 </template>
 
 <script>
+  import Vue from '@/model/contact.js';
     export default{
        data(){
          return{
@@ -32,12 +33,19 @@
          }
        },
       methods:{
-        nav(val){
+        nav(key,val){
           for(var i in this.list){
             this.list[i].show = false;
           }
-          this.list[val].show = true;
+          this.list[key].show = true;
+
+          //路由跳转并传值
+          this.$router.push({path:'/shop/type',query:{id : key,name: val}});
+          Vue.$emit('type',key);
         },
+        backThis(){
+
+        }
       },
     }
 
@@ -48,6 +56,9 @@
     height: 486px;
     overflow: hidden;
     overflow-y: scroll;
+  }
+  #nav-l::-webkit-scrollbar{
+    display: none;
   }
 #nav-l ul{
   display: flex;

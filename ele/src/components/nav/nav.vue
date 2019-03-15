@@ -21,6 +21,7 @@
     height: 40px;
     width: 100%;
     display: flex;
+    border-bottom: 1px solid rgb(7,17,27,0.1);
   }
   #nav ul{
     width: 100%;
